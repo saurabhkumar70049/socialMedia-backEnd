@@ -14,6 +14,8 @@ require('dotenv').config();
 const app = express();
 const PORT = 5000;
 
+app.use(express.json());
+
 mongoose.connect(process.env.DATABASE_URL)
     .then((result)=>{
         console.log(`Server is connected to database`)
