@@ -6,10 +6,11 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 
+require('dotenv').config();
+
 require('./models/user');
 require('./models/post');
 
-require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
