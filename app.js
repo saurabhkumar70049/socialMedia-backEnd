@@ -9,13 +9,15 @@ const { default: mongoose } = require('mongoose');
 const customLogger = require('./middleware/customLogger');
 const morgan = require('morgan');
 const colors = require('colors');
-const userRouter = require('./routes/user');
 
 
 require('dotenv').config();
 
-require('./models/user');
-require('./models/post');
+require('./models/user.model.js');
+require('./models/post.model.js');
+
+
+const userRouter = require('./routes/user.routes');
 
 
 const app = express();
@@ -40,11 +42,6 @@ morgan.token('info', function(req, res){
 morgan.format('apiDetail', ':method :url :status :info'.underline.red) 
 
 
-app.post('/hello',(req, res)=> {
-    res.send("hello world");
-})
-
-
 
 //middleWare 
 
@@ -56,7 +53,9 @@ app.use(customLogger)
 //Morgan is another HTTP request logger middleware for Node. js. It simplifies the process of logging requests to your application
 app.use(morgan('apiDetail')) 
 
-app.use('/api', userRouter);
+app.use('/user', userRouter);
+
+
 
 
 

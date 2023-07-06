@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { use } = require('../routes/user');
 
 
 const userSchema = new mongoose.Schema({
@@ -36,5 +35,9 @@ const userSchema = new mongoose.Schema({
 {timestamps:true} // it is basically use to know what's time user is generated
 )
 
-const user = mongoose.model("User", userSchema);
-module.exports = user
+// const User = mongoose.model("User", userSchema);
+// module.exports = User;
+
+mongoose.model("User", userSchema);
+
+

@@ -1,15 +1,13 @@
-const express = require("express");
-const sendResponse = require("../utilities/sendResponse");
-const { default: mongoose } = require("mongoose");
-const userRouter = express.Router();
 
-const User = require("../models/user");
+const express = require('express');
+const mongoose= require("mongoose");
 
+// const User = require('../models/user.model')
+const User = mongoose.model("User");
 
-
-userRouter.post('/signup', (req, res)=> {
-    const {name, email, password, phone}= req.body;
-    if(!name || !email || !password || !phone){
+const singup = async (req, res)=> {
+    const {name, email, password, confirmPassword}= req.body;
+    if(!name || !email || !password || !confirmPassword){
         return sendResponse(res, 404, false, "Fill all field", {});
     }
     User.findOne({email})
@@ -21,8 +19,7 @@ userRouter.post('/signup', (req, res)=> {
         newUser = new User({
             name,
             email,
-            password,
-            phone
+            password
         })
         newUser.save()
          .then((userSave)=> {
@@ -33,9 +30,8 @@ userRouter.post('/signup', (req, res)=> {
          })
      })
      .catch(err=>{
-        return sendResponse(res, 404, false, "Error Occure ", err);
+        return sendResponse(res, 400, false, "Error Occure ", err);
      })
+}
 
-})
-
-module.exports = userRouter;
+module.exports = singup;

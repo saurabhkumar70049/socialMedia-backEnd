@@ -1,5 +1,5 @@
 
-const sendResponse = (res, status, success, message, data)=>{
+const sendResponse = (res, status = 200, success=true, message= "", data= {})=>{
     return(
         res.status(status).json({
             success,
