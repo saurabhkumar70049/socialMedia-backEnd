@@ -31,11 +31,11 @@ const postSchema = new mongoose.Schema({
         type:String,
         require:false,
     },
-    image_link:{
+    imageLink:{
         type:String,
         require:false,
     },
-    user_id:{
+    userId:{
         type:ObjectId,
         ref:"User",
         require:true,

@@ -18,6 +18,7 @@ require('./models/post.model.js');
 
 
 const userRouter = require('./routes/user.route.js');
+const postRoute = require('./routes/post.route.js');
 
 
 const app = express();
@@ -54,6 +55,10 @@ app.use(customLogger)
 app.use(morgan('apiDetail')) 
 
 app.use('/user', userRouter);
+
+app.use('/post', postRoute);
+
+
 
 
 
