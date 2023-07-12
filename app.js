@@ -17,7 +17,7 @@ require('./models/user.model.js');
 require('./models/post.model.js');
 
 
-const userRouter = require('./routes/user.routes');
+const userRouter = require('./routes/user.route.js');
 
 
 const app = express();

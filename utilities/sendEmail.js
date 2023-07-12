@@ -1,20 +1,22 @@
 const fs = require('fs').promises;
 const ejs = require('ejs');
+require('dotenv').config();
 
 const nodeMailer = require('nodemailer');
+const { env } = require('process');
 
 
 const sendEmail = async(options)=> {
     let transporter = nodeMailer.createTransport({
         service:'gmail',
         auth:{
-            user:"saurabhbarej.me@gmail.com",
-            pass: "hqafwijxkkedzmil"
+            user:process.env.EMAIL_ID,
+            pass: process.env.EMAIL_SECRET_KEY
         }
     })
 
 
-    let templateString = await fs.readFile('./htmlMail/mail2.ejs', 'utf-8'); // here we read html file as string 
+    // let templateString = await fs.readFile('./htmlMail/mail2.ejs', 'utf-8'); // here we read html file as string 
 
 
     //this replace fuction we can use replce spacific word in our html file
@@ -23,17 +25,17 @@ const sendEmail = async(options)=> {
     // templateString = templateString.replaceAll('{link}', options.link);
 
 
-    let ejsEmail = ejs.render(templateString, {...options});
+    // let ejsEmail = ejs.render(templateString, {...options});
 
 
     let mailOptions ={
-        from:"saurabhbarej.me@gmail.com",
-        to:["hungrysunny6@gmail.com"],
+        from:process.env.EMAIL_ID,
+        to: options.email,
 
         // here i write a html email in html file and then import it here
         // html: templateString  
 
-        html:ejsEmail
+        // html:ejsEmail
 
 
         ////this how we send html email 
@@ -45,8 +47,8 @@ const sendEmail = async(options)=> {
         // `
 
         ////this is the way to send a normal email 
-        // subject:"testing", 
-        // text:"this testing mail from nodeMailer",
+        subject:options.subject, 
+        text:options.text,
         // attachments:[  //this is how can send file to mail
         //     {
         //         filename:"img1.jpg",
@@ -65,8 +67,4 @@ const sendEmail = async(options)=> {
     }
 }
 
-sendEmail({
-    name:"saurabh",
-    message:" hey are you fine",
-    link: "google.com"
-})
+module.exports = sendEmail;

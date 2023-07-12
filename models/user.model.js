@@ -10,27 +10,31 @@ const userSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    email_verification_sent_time:{
+    emailVerificationSentTime:{
         type:String
+    },
+    emailVerified:{
+        type:Boolean,
+        default:false
     },
     password:{
         type:String,
         require:true
     },
     phone:{
-        type:String,
+        type:Number,
         require:true
     },
-    phone_otp:{
+    phoneOtp:{
         type:String
     },
-    phone_otp_time:{
+    phoneOtpTime:{
         type:Date,
     },
-    phone_verified:{
+    phoneVerified:{
         type:Boolean,
         default:false
-    }
+    },
 },
 {timestamps:true} // it is basically use to know what's time user is generated
 )
